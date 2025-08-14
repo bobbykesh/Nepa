@@ -24,7 +24,7 @@
         </div>
         <div class="form-group" style="margin-bottom: 15px;">
             <label for="time" style="display: block; margin-bottom: 5px; font-weight: bold;">Time:</label>
-            <input type="time" id="time" style="width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;" required>
+            <input type="text" id="time" placeholder="HH:mm:ss (e.g., 10:17:33)" style="width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;" required>
         </div>
         <div class="form-group" style="margin-bottom: 15px;">
             <label for="address" style="display: block; margin-bottom: 5px; font-weight: bold;">Address:</label>
@@ -118,9 +118,14 @@
             <p style="font-size: 12px; margin: 0; color: #666;">pos-service@opay-inc.com</p>
             <p style="font-size: 12px; margin: 0; color: #666;">07008888329</p>
         </div>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <button onclick="downloadReceipt()" style="padding: 10px 20px; background-color: #28a745; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">Download Receipt</button>
+        </div>
     </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
 <script>
     function generateReceipt() {
         // Get user inputs
@@ -150,8 +155,8 @@
         document.getElementById('receipt-amount').textContent = `NGN ${parseFloat(amountInput).toFixed(2)}`;
         document.getElementById('receipt-date-time').textContent = `${dateInput} ${timeInput}`;
         document.getElementById('receipt-customer-name').textContent = customerNameInput;
-        document.getElementById('receipt-customer-name-top').textContent = "CHRISTOPHER ADEOLA ADEOKUN"; // Fixed value
-        document.getElementById('receipt-address-top').textContent = "No 19 Eruwon Street Olokuta Idi Aba Abeokuta Ogun State"; // Fixed value
+        document.getElementById('receipt-customer-name-top').textContent = "CHRISTOPHER EFE"; // Fixed value
+        document.getElementById('receipt-address-top').textContent = " Federal Poly Ilaro Ogun State"; // Fixed value
         document.getElementById('receipt-phone').textContent = phoneInput;
         document.getElementById('receipt-address').textContent = addressInput;
         document.getElementById('receipt-meter').textContent = meterNumber;
@@ -163,6 +168,22 @@
         // Show the receipt and hide the form
         document.getElementById('input-form').style.display = 'none';
         document.getElementById('receipt-container').style.display = 'block';
+    }
+
+    function downloadReceipt() {
+        const receiptNode = document.getElementById('receipt-container');
+        receiptNode.style.padding = '20px';
+        
+        domtoimage.toPng(receiptNode)
+            .then(function (dataUrl) {
+                const link = document.createElement('a');
+                link.download = 'opay-receipt.png';
+                link.href = dataUrl;
+                link.click();
+            })
+            .catch(function (error) {
+                console.error('oops, something went wrong!', error);
+            });
     }
 </script>
 
