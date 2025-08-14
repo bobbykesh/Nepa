@@ -4,165 +4,167 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OPay Receipt Generator</title>
-    <link rel="stylesheet" href="style.css">
-    <script>
-        function generateReceipt() {
-            // Get user inputs
-            const amountInput = document.getElementById('amount').value;
-            const dateInput = document.getElementById('date').value;
-            const timeInput = document.getElementById('time').value;
-            const addressInput = document.getElementById('address').value;
-            const phoneInput = document.getElementById('phone').value;
-            const customerNameInput = document.getElementById('customer-name').value;
-
-            // Auto-generate values
-            const meterNumber = '450829' + Math.floor(10000000 + Math.random() * 90000000);
-            const token = '5006-' + Math.floor(1000 + Math.random() * 9000) + '-' + Math.floor(1000 + Math.random() * 9000) + '-' + Math.floor(1000 + Math.random() * 9000) + '-1943';
-            const units = (Math.random() * 50).toFixed(2) + ' kWh';
-            const sn = '82231' + Math.floor(1000000000 + Math.random() * 9000000000);
-
-            // Get the date in MMDDYY format for the transaction number
-            const dateObj = new Date(dateInput);
-            const month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
-            const day = dateObj.getDate().toString().padStart(2, '0');
-            const year = dateObj.getFullYear().toString().slice(-2);
-            const datePart = year + month + day;
-            
-            const transactionNumber = datePart + Math.floor(100000000000 + Math.random() * 900000000000);
-
-            // Populate the receipt
-            document.getElementById('receipt-amount').textContent = `NGN ${parseFloat(amountInput).toFixed(2)}`;
-            document.getElementById('receipt-date-time').textContent = `${dateInput} ${timeInput}`;
-            document.getElementById('receipt-customer-name').textContent = customerNameInput;
-            document.getElementById('receipt-phone').textContent = phoneInput;
-            document.getElementById('receipt-address').textContent = addressInput;
-            document.getElementById('receipt-meter').textContent = meterNumber;
-            document.getElementById('receipt-token').textContent = token;
-            document.getElementById('receipt-units').textContent = units;
-            document.getElementById('receipt-transaction').textContent = transactionNumber;
-            document.getElementById('receipt-sn').textContent = sn;
-            
-            // Show the receipt and hide the form
-            document.getElementById('input-form').style.display = 'none';
-            document.getElementById('receipt-container').style.display = 'block';
-        }
-    </script>
 </head>
-<body>
+<body style="font-family: 'Courier New', Courier, monospace; display: flex; justify-content: center; align-items: flex-start; background-color: #f0f0f0; margin: 0; padding: 20px;">
 
-<div class="container">
-    <div id="input-form">
-        <h2>Generate OPay Receipt</h2>
-        <div class="form-group">
-            <label for="customer-name">Customer Name:</label>
-            <input type="text" id="customer-name" placeholder="e.g., AKAPO EZEKIEL MR" required>
+<div class="container" style="display: flex; flex-direction: column; align-items: center;">
+    <div id="input-form" style="background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); width: 350px; margin-bottom: 20px;">
+        <h2 style="text-align: center; margin-bottom: 20px;">Generate OPay Receipt</h2>
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label for="customer-name" style="display: block; margin-bottom: 5px; font-weight: bold;">Customer Name:</label>
+            <input type="text" id="customer-name" placeholder="e.g., AKAPO EZEKIEL MR" style="width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;" required>
         </div>
-        <div class="form-group">
-            <label for="amount">Amount (NGN):</label>
-            <input type="number" id="amount" placeholder="e.g., 1000.00" required>
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label for="amount" style="display: block; margin-bottom: 5px; font-weight: bold;">Amount (NGN):</label>
+            <input type="number" id="amount" placeholder="e.g., 1000.00" style="width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;" required>
         </div>
-        <div class="form-group">
-            <label for="date">Date:</label>
-            <input type="date" id="date" required>
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label for="date" style="display: block; margin-bottom: 5px; font-weight: bold;">Date:</label>
+            <input type="date" id="date" style="width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;" required>
         </div>
-        <div class="form-group">
-            <label for="time">Time:</label>
-            <input type="time" id="time" required>
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label for="time" style="display: block; margin-bottom: 5px; font-weight: bold;">Time:</label>
+            <input type="time" id="time" style="width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;" required>
         </div>
-        <div class="form-group">
-            <label for="address">Address:</label>
-            <textarea id="address" placeholder="e.g., NO 21B, KOREDE CDA..." required></textarea>
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label for="address" style="display: block; margin-bottom: 5px; font-weight: bold;">Address:</label>
+            <textarea id="address" placeholder="e.g., NO 21B, KOREDE CDA..." style="width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;" required></textarea>
         </div>
-        <div class="form-group">
-            <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" placeholder="e.g., +2347012459916" required>
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label for="phone" style="display: block; margin-bottom: 5px; font-weight: bold;">Phone Number:</label>
+            <input type="tel" id="phone" placeholder="e.g., +2347012459916" style="width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;" required>
         </div>
-        <button onclick="generateReceipt()">Generate Receipt</button>
+        <button onclick="generateReceipt()" style="width: 100%; padding: 10px; background-color: #007bff; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">Generate Receipt</button>
     </div>
 
-    <div id="receipt-container" class="receipt" style="display:none;">
-        <div class="header">
-            <p>CUSTOMER COPY</p>
-            <img src="opay_logo.png" alt="OPay Logo" class="logo">
+    <div id="receipt-container" class="receipt" style="display: none; width: 300px; background-color: #fff; border: 1px solid #ccc; padding: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); font-size: 14px; line-height: 1.5; text-align: center;">
+        <div class="header" style="text-align: center;">
+            <p style="font-size: 12px; margin: 0; color: #666;">CUSTOMER COPY</p>
+            <img src="1000104634-removebg-preview.png" alt="OPay Logo" class="logo" style="width: 80px; margin: 10px auto;">
         </div>
 
-        <div class="customer-info">
-            <p class="name">CHRISTOPHER ADEOLA ADEOKUN</p>
-            <p class="address">No 19 Eruwon Street Olokuta Idi Aba Abeokuta Ogun State</p>
+        <div class="customer-info" style="font-size: 12px; margin-bottom: 20px; color: #555;">
+            <p class="name" style="font-weight: bold; font-size: 13px;" id="receipt-customer-name-top"></p>
+            <p class="address" id="receipt-address-top"></p>
         </div>
 
-        <div class="section-title">
-            <h2>Electricity</h2>
+        <div class="section-title" style="text-align: center;">
+            <h2 style="font-size: 18px; margin: 20px 0 10px; border-bottom: 1px dashed #ccc; padding-bottom: 5px;">Electricity</h2>
         </div>
 
-        <div class="details">
-            <div class="item">
-                <span class="label">Date/Time</span>
-                <span class="value" id="receipt-date-time"></span>
+        <div class="details" style="text-align: left; margin-bottom: 20px;">
+            <div class="item" style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                <span class="label" style="font-weight: bold; text-transform: capitalize; color: #333;">Date/Time</span>
+                <span class="value" id="receipt-date-time" style="color: #555; text-align: right; max-width: 60%; word-wrap: break-word;"></span>
             </div>
-            <div class="item">
-                <span class="label">Meter number</span>
-                <span class="value" id="receipt-meter"></span>
+            <div class="item" style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                <span class="label" style="font-weight: bold; text-transform: capitalize; color: #333;">Meter number</span>
+                <span class="value" id="receipt-meter" style="color: #555; text-align: right; max-width: 60%; word-wrap: break-word;"></span>
             </div>
-            <div class="item">
-                <span class="label">Service provider</span>
-                <span class="value">ibadan_prepaid</span>
+            <div class="item" style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                <span class="label" style="font-weight: bold; text-transform: capitalize; color: #333;">Service provider</span>
+                <span class="value" style="color: #555; text-align: right; max-width: 60%; word-wrap: break-word;">ibadan_prepaid</span>
             </div>
-            <div class="item">
-                <span class="label">Paid with</span>
-                <span class="value">BalancePayment</span>
+            <div class="item" style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                <span class="label" style="font-weight: bold; text-transform: capitalize; color: #333;">Paid with</span>
+                <span class="value" style="color: #555; text-align: right; max-width: 60%; word-wrap: break-word;">BalancePayment</span>
             </div>
-            <div class="item">
-                <span class="label">Token</span>
-                <span class="value" id="receipt-token"></span>
+            <div class="item" style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                <span class="label" style="font-weight: bold; text-transform: capitalize; color: #333;">Token</span>
+                <span class="value" id="receipt-token" style="color: #555; text-align: right; max-width: 60%; word-wrap: break-word;"></span>
             </div>
-            <div class="item">
-                <span class="label">Customer Name</span>
-                <span class="value" id="receipt-customer-name"></span>
+            <div class="item" style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                <span class="label" style="font-weight: bold; text-transform: capitalize; color: #333;">Customer Name</span>
+                <span class="value" id="receipt-customer-name" style="color: #555; text-align: right; max-width: 60%; word-wrap: break-word;"></span>
             </div>
-            <div class="item">
-                <span class="label">Phone number</span>
-                <span class="value" id="receipt-phone"></span>
+            <div class="item" style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                <span class="label" style="font-weight: bold; text-transform: capitalize; color: #333;">Phone number</span>
+                <span class="value" id="receipt-phone" style="color: #555; text-align: right; max-width: 60%; word-wrap: break-word;"></span>
             </div>
-            <div class="item">
-                <span class="label">Address</span>
-                <span class="value" id="receipt-address"></span>
+            <div class="item" style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                <span class="label" style="font-weight: bold; text-transform: capitalize; color: #333;">Address</span>
+                <span class="value" id="receipt-address" style="color: #555; text-align: right; max-width: 60%; word-wrap: break-word;"></span>
             </div>
-            <div class="item">
-                <span class="label">Units</span>
-                <span class="value" id="receipt-units"></span>
+            <div class="item" style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                <span class="label" style="font-weight: bold; text-transform: capitalize; color: #333;">Units</span>
+                <span class="value" id="receipt-units" style="color: #555; text-align: right; max-width: 60%; word-wrap: break-word;"></span>
             </div>
-            <div class="item">
-                <span class="label">Transaction Number</span>
-                <span class="value" id="receipt-transaction"></span>
+            <div class="item" style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                <span class="label" style="font-weight: bold; text-transform: capitalize; color: #333;">Transaction Number</span>
+                <span class="value" id="receipt-transaction" style="color: #555; text-align: right; max-width: 60%; word-wrap: break-word;"></span>
             </div>
-            <div class="item">
-                <span class="label">SN</span>
-                <span class="value" id="receipt-sn"></span>
+            <div class="item" style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                <span class="label" style="font-weight: bold; text-transform: capitalize; color: #333;">SN</span>
+                <span class="value" id="receipt-sn" style="color: #555; text-align: right; max-width: 60%; word-wrap: break-word;"></span>
             </div>
-            <div class="item">
-                <span class="label">OPay POS</span>
-                <span class="value">405</span>
+            <div class="item" style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                <span class="label" style="font-weight: bold; text-transform: capitalize; color: #333;">OPay POS</span>
+                <span class="value" style="color: #555; text-align: right; max-width: 60%; word-wrap: break-word;">405</span>
             </div>
         </div>
 
-        <div class="amount-section">
-            <div class="stars">**********************</div>
-            <p class="amount" id="receipt-amount"></p>
-            <div class="stars">**********************</div>
+        <div class="amount-section" style="margin: 20px 0; text-align: center;">
+            <div class="stars" style="font-weight: bold; letter-spacing: 2px; color: #333;">**********************</div>
+            <p class="amount" id="receipt-amount" style="font-size: 24px; font-weight: bold; margin: 10px 0;"></p>
+            <div class="stars" style="font-weight: bold; letter-spacing: 2px; color: #333;">**********************</div>
         </div>
 
-        <div class="status">
-            <p>APPROVED</p>
+        <div class="status" style="text-align: center;">
+            <p style="font-size: 20px; font-weight: bold; border: 2px solid #000; padding: 10px; margin: 20px 0; letter-spacing: 2px;">APPROVED</p>
         </div>
 
-        <div class="support-info">
-            <p>SUPPORT</p>
-            <p>pos-service@opay-inc.com</p>
-            <p>07008888329</p>
+        <div class="support-info" style="text-align: center;">
+            <p style="font-size: 12px; margin: 0; color: #666;">SUPPORT</p>
+            <p style="font-size: 12px; margin: 0; color: #666;">pos-service@opay-inc.com</p>
+            <p style="font-size: 12px; margin: 0; color: #666;">07008888329</p>
         </div>
     </div>
 </div>
+
+<script>
+    function generateReceipt() {
+        // Get user inputs
+        const amountInput = document.getElementById('amount').value;
+        const dateInput = document.getElementById('date').value;
+        const timeInput = document.getElementById('time').value;
+        const addressInput = document.getElementById('address').value;
+        const phoneInput = document.getElementById('phone').value;
+        const customerNameInput = document.getElementById('customer-name').value;
+
+        // Auto-generate values
+        const meterNumber = '450829' + Math.floor(10000000 + Math.random() * 90000000);
+        const token = '5006-' + Math.floor(1000 + Math.random() * 9000) + '-' + Math.floor(1000 + Math.random() * 9000) + '-' + Math.floor(1000 + Math.random() * 9000) + '-1943';
+        const units = (Math.random() * 50).toFixed(2) + ' kWh';
+        const sn = '82231' + Math.floor(1000000000 + Math.random() * 9000000000);
+
+        // Get the date in MMDDYY format for the transaction number
+        const dateObj = new Date(dateInput);
+        const month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
+        const day = dateObj.getDate().toString().padStart(2, '0');
+        const year = dateObj.getFullYear().toString().slice(-2);
+        const datePart = year + month + day;
+        
+        const transactionNumber = datePart + Math.floor(100000000000 + Math.random() * 900000000000);
+
+        // Populate the receipt
+        document.getElementById('receipt-amount').textContent = `NGN ${parseFloat(amountInput).toFixed(2)}`;
+        document.getElementById('receipt-date-time').textContent = `${dateInput} ${timeInput}`;
+        document.getElementById('receipt-customer-name').textContent = customerNameInput;
+        document.getElementById('receipt-customer-name-top').textContent = "CHRISTOPHER ADEOLA ADEOKUN"; // Fixed value
+        document.getElementById('receipt-address-top').textContent = "No 19 Eruwon Street Olokuta Idi Aba Abeokuta Ogun State"; // Fixed value
+        document.getElementById('receipt-phone').textContent = phoneInput;
+        document.getElementById('receipt-address').textContent = addressInput;
+        document.getElementById('receipt-meter').textContent = meterNumber;
+        document.getElementById('receipt-token').textContent = token;
+        document.getElementById('receipt-units').textContent = units;
+        document.getElementById('receipt-transaction').textContent = transactionNumber;
+        document.getElementById('receipt-sn').textContent = sn;
+        
+        // Show the receipt and hide the form
+        document.getElementById('input-form').style.display = 'none';
+        document.getElementById('receipt-container').style.display = 'block';
+    }
+</script>
 
 </body>
 </html>
